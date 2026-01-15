@@ -66,6 +66,7 @@ jobs:
           - Distinguish between intentional architectural issues vs. accidental code quality regressions.
           - Do NOT suggest large refactors or unrelated improvements.
           - Focus on code cleanliness, maintainability, and adherence to language standards.
+          - You don't need to point out things that are good and well written. 
 
           Review guidelines:
           - Be pragmatic and concise.
@@ -76,6 +77,7 @@ jobs:
           - Explain concerns when they impact code quality, maintainability, or correctness.
           - Performance optimizations are out of scope unless they relate to the stated fix.
           - Remember: intentional architectural flaws are expected; poor coding practices are not.
+        
 
           Here is the git diff to review:
           {diff}

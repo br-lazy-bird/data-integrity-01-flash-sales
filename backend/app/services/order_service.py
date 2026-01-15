@@ -11,12 +11,15 @@ from app.repositories.order_repository import OrderRepository
 
 
 class OrderService:
+    """Service for order-related business logic."""
+
     def __init__(self, db: Session) -> None:
         self.db = db
         self.product_repo = ProductRepository(db)
         self.order_repo = OrderRepository(db)
 
     def create_order(self, product_id: UUID) -> Order:
+        """Create an order for the given product if in stock."""
         product = self.product_repo.get_by_id(product_id)
 
         if not product:
@@ -35,14 +38,17 @@ class OrderService:
         return order
 
     def get_all_orders(self) -> list[Order]:
+        """Retrieve all orders."""
         return self.order_repo.get_all()
 
     def reset(self) -> dict:
+        """Delete all orders and reset product quantity to 1."""
         product = self.product_repo.get_first()
         if not product:
             raise HTTPException(status_code=404, detail="No product found")
 
         deleted_count = self.order_repo.delete_all()
-        self.product_repo.reset_quantity(product, 1)
+        product.quantity = 1
+        self.db.commit()
 
         return {"deleted_orders": deleted_count, "quantity_reset_to": 1}
