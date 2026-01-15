@@ -1,0 +1,21 @@
+import os
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set.")
+
+engine = create_engine(url=DATABASE_URL, echo=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+
+def get_db():
+    """Provide a database session for each request."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
