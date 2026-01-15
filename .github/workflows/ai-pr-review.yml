@@ -58,7 +58,7 @@ jobs:
           - Code is NOT expected to be production-ready after each PR.
 
           Current broken system description:
-          - System with a poor performance due to the lack of database indexes.
+          - System with data integrity issue. 
 
           Reviewer mindset:
           - Treat this PR as one step in an incremental learning sequence.
