@@ -27,5 +27,6 @@ class ProductRepository:
     def decrement_quantity(self, product_id: UUID) -> None:
         """Atomically decrement the quantity of a product."""
         self.db.query(Product).filter(Product.id == product_id).update(
-            {Product.quantity: Product.quantity - 1}
+            {Product.quantity: Product.quantity - 1},
+            synchronize_session=False
         )
