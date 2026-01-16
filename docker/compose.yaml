@@ -66,5 +66,19 @@ services:
       backend-2:
         condition: service_healthy
 
+  frontend:
+    build: ../frontend
+    container_name: flash_sale_frontend
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - REACT_APP_API_URL=http://localhost:${BACKEND_PORT}
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    volumes:
+      - ../frontend/src:/app/src
+      - ../frontend/public:/app/public
+    depends_on:
+      - nginx
+
 volumes:
   postgres_data:

@@ -23,3 +23,10 @@ class ProductRepository:
         """Update the quantity of a product."""
         product.quantity = new_quantity
         self.db.flush()
+
+    def decrement_quantity(self, product_id: UUID) -> None:
+        """Atomically decrement the quantity of a product."""
+        self.db.query(Product).filter(Product.id == product_id).update(
+            {Product.quantity: Product.quantity - 1},
+            synchronize_session=False
+        )

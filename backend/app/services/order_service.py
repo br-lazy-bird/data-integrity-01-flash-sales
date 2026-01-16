@@ -9,6 +9,10 @@ from app.models.order import Order
 from app.repositories.product_repository import ProductRepository
 from app.repositories.order_repository import OrderRepository
 
+from app.core.logging_config import get_logger
+
+logger = get_logger(__name__)
+
 
 class OrderService:
     """Service for order-related business logic."""
@@ -20,8 +24,9 @@ class OrderService:
 
     def create_order(self, product_id: UUID) -> Order:
         """Create an order for the given product if in stock."""
+        
         product = self.product_repo.get_by_id(product_id)
-
+        
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
 
@@ -32,7 +37,7 @@ class OrderService:
             time.sleep(0.1)
 
         order = self.order_repo.create(product_id)
-        product.quantity -= 1
+        self.product_repo.decrement_quantity(product_id)
         self.db.commit()
 
         return order
