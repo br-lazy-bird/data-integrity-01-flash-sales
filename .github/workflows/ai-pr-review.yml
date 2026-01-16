@@ -66,7 +66,9 @@ jobs:
           - Distinguish between intentional architectural issues vs. accidental code quality regressions.
           - Do NOT suggest large refactors or unrelated improvements.
           - Focus on code cleanliness, maintainability, and adherence to language standards.
-          - You don't need to point out things that are good and well written. 
+          - You don't need to point out things that are good and well written.
+          - You should be concise and straightforward. 
+          - If you are not 100% sure about an issue, make it clear in the review. 
 
           Review guidelines:
           - Be pragmatic and concise.
