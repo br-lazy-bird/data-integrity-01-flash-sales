@@ -1,0 +1,80 @@
+services:
+  test-db:
+    image: postgres:15
+    container_name: flash_sale_test_db
+    environment:
+      POSTGRES_DB: test_flash_sale
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - ../database/init-test:/docker-entrypoint-initdb.d
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d test_flash_sale"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend-1:
+    build: ../backend
+    container_name: flash_sale_test_backend_1
+    environment:
+      - DATABASE_URL=postgresql+psycopg://test_user:test_password@test-db:5432/test_flash_sale
+      - PYTHON_ENV=test
+      - ADD_DELAY=true
+      - SERVICE_NAME=backend-1
+    depends_on:
+      test-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend-2:
+    build: ../backend
+    container_name: flash_sale_test_backend_2
+    environment:
+      - DATABASE_URL=postgresql+psycopg://test_user:test_password@test-db:5432/test_flash_sale
+      - PYTHON_ENV=test
+      - ADD_DELAY=true
+      - SERVICE_NAME=backend-2
+    depends_on:
+      test-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  test-nginx:
+    build: ../nginx
+    container_name: flash_sale_test_nginx
+    depends_on:
+      backend-1:
+        condition: service_healthy
+      backend-2:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  test-runner:
+    build: ../backend
+    container_name: flash_sale_test_runner
+    environment:
+      - PYTHON_ENV=test
+      - API_URL=http://test-nginx:80
+    depends_on:
+      test-nginx:
+        condition: service_healthy
+    volumes:
+      - ../backend:/app
+    command: pytest tests/ -v -s
