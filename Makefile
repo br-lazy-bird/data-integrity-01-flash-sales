@@ -51,3 +51,4 @@ test-build:
 	@docker compose -f $(COMPOSE_TEST_FILE) --env-file $(ENV_FILE) up --build --abort-on-container-exit --exit-code-from test-runner 2>&1 | grep -E "test-runner|PASSED|FAILED|ERROR|SUCCESS|AssertionError|assert |===|---"
 	@echo "Cleaning up test containers..."
 	@docker compose -f $(COMPOSE_TEST_FILE) --env-file $(ENV_FILE) down > /dev/null 2>&1
+	
