@@ -205,7 +205,9 @@ product = self.product_repo.get_by_id_for_update(product_id)
 1. **`with_for_update()`** adds `FOR UPDATE` to the SELECT query, acquiring an exclusive row lock
 2. **Blocking behavior:** The second transaction waits until the first commits or rolls back
 3. **Fresh read:** When the lock is acquired, the second transaction sees the updated quantity
-4. **Automatic release:** The lock is released when the transaction commits (at the end of the request)
+4. **Automatic release:** The lock is released when the database transaction commits or rolls back
+
+**Transaction Boundaries:** In this implementation, the session uses `autocommit=False` (see `backend/app/core/database.py`), meaning a transaction starts implicitly with the first query and ends with the explicit `db.commit()` call in the service. The lock is held for the duration of this database transaction, not the HTTP request. If using auto-commit or managing transactions differently, lock behavior may vary.
 
 ---
 
