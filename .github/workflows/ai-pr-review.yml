@@ -61,6 +61,7 @@ jobs:
           - System with data integrity issue. 
 
           Reviewer mindset:
+          - You should only point out things that needs to be changed. Things that are well written doesn't need to be mentioned.
           - Treat this PR as one step in an incremental learning sequence.
           - Code style, syntax, and language conventions are NOT part of the intentional flaws.
           - Distinguish between intentional architectural issues vs. accidental code quality regressions.
