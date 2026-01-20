@@ -100,11 +100,7 @@ The system will:
 
 ## The Problem
 
-> "Hey... so we launched this flash sale thing today, right? Limited edition book, only 1 in stock. Marketing was hyped, everyone was ready..."
->
-> "But then customers started complaining. They're saying the system sold the same book twice. Stock went negative. The finance team is losing it."
->
-> "I looked at the database and... yeah, two orders, one book. The timestamps are like milliseconds apart. Something's definitely off, but I promised myself a coffee break 10 minutes ago, so... could you figure this out? Thanks!"
+> 🐦 "Hey... so we launched this flash sale thing today, right? Limited edition book, only 1 in stock. Marketing was hyped, everyone was ready... But then customers started complaining. They're saying the system sold the same book twice. Stock went negative. The finance team is losing it. I looked at the database and... yeah, two orders, one book. The timestamps are like milliseconds apart. Something's definitely off, but I promised myself a coffee break 10 minutes ago, so... could you figure this out? Thanks!"
 
 **Your Mission:**
 1. Investigate why a single purchase creates duplicate orders
