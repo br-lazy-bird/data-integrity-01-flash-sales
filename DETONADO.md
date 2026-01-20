@@ -326,4 +326,8 @@ def create_order(request: OrderRequest, idempotency_key: str = Header(...)):
 
 ---
 
+> "Oh, you actually fixed it? Nice... I mean, I knew you could do it. That's why I picked you, obviously."
+>
+> "Pessimistic locking, huh? Yeah, I was gonna suggest that... eventually. Anyway, thanks for the help. I'm gonna go back to my nap now. But hey, if I find another bug, I know who to call..."
+
 **Congratulations!** You've successfully fixed the flash sale race condition. This pessimistic locking pattern applies to any scenario where concurrent requests must not exceed a limited resource.

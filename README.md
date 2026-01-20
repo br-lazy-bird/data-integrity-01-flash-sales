@@ -90,13 +90,21 @@ The system will:
 
 ---
 
+## Meet the Lazy Bird
+
+> The Lazy Bird is a peculiar creature. It has an exceptional talent for catching bugs... but absolutely zero motivation to fix them. You'll find it wandering around codebases, spotting issues, and then immediately looking for someone else to do the hard work.
+>
+> Today, it found you.
+
+---
+
 ## The Problem
 
-When you click "Buy Now" on the flash sale product with 1 item in stock, something unexpected happens:
-
-- **Two orders** are created instead of one
-- The stock shows **-1** (negative inventory)
-- The timestamps on both orders are milliseconds apart
+> "Hey... so we launched this flash sale thing today, right? Limited edition book, only 1 in stock. Marketing was hyped, everyone was ready..."
+>
+> "But then customers started complaining. They're saying the system sold the same book twice. Stock went negative. The finance team is losing it."
+>
+> "I looked at the database and... yeah, two orders, one book. The timestamps are like milliseconds apart. Something's definitely off, but I promised myself a coffee break 10 minutes ago, so... could you figure this out? Thanks!"
 
 **Your Mission:**
 1. Investigate why a single purchase creates duplicate orders
