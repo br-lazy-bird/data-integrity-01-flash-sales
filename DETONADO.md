@@ -118,9 +118,6 @@ Request A (Backend 1)              Request B (Backend 2)
 If you want to learn more about database locking:
 
 - [Lazy Bird Blog - Database Locking](https://lazybird.com.br/blog/2026-01-19-lazy-bird---database-locking/)
-- [PostgreSQL Explicit Locking](https://www.postgresql.org/docs/current/explicit-locking.html) - Official documentation on row-level locks
-- [SQLAlchemy Query.with_for_update()](https://docs.sqlalchemy.org/en/20/orm/queryguide/query.html#sqlalchemy.orm.Query.with_for_update) - ORM-level locking API
-- [Martin Kleppmann - Designing Data-Intensive Applications](https://dataintensive.net/) - Chapter 7 covers transactions and concurrency
 
 ---
 
